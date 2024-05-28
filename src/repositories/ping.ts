@@ -1,7 +1,3 @@
-class PingRepository {
-  getPingResponse(): string {
-      return "Pong";
-  }
-}
-
-export default PingRepository;
+export const ping = () => {
+  return 'Pong';
+};

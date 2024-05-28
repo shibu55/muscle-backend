@@ -1,17 +1,12 @@
 import { Request, Response } from 'express';
-import PingService from '../services/ping';
+import * as pingService from '../services/ping';
 
-class PingController {
-    private pingService: PingService;
-
-    constructor() {
-        this.pingService = new PingService();
+export const ping = (req: Request, res: Response) => {
+    try {
+        const message = pingService.ping();
+        res.send(message);
+    } catch (error) {
+        console.error('Error handling ping:', error);
+        res.status(500).send('Error handling ping');
     }
-
-    ping(req: Request, res: Response): void {
-        const response = this.pingService.getPing();
-        res.send(response);
-    }
-}
-
-export default PingController;
+};

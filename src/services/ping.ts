@@ -1,15 +1,5 @@
-import PingRepository from '../repositories/ping';
+import * as pingRepository from '../repositories/ping';
 
-class PingService {
-    private pingRepository: PingRepository;
-
-    constructor() {
-        this.pingRepository = new PingRepository();
-    }
-
-    getPing(): string {
-        return this.pingRepository.getPingResponse();
-    }
-}
-
-export default PingService;
+export const ping = () => {
+    return pingRepository.ping();
+};
