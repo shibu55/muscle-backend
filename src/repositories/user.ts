@@ -1,7 +1,9 @@
-import User, {UserCreationAttributes} from '../models/user';
+import bcrypt from 'bcryptjs';
+import User, { UserCreationAttributes } from '../models/user';
 
 export const createUser = async (data: Omit<UserCreationAttributes, 'id'>) => {
-  return await User.create(data);
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+  return await User.create({ ...data, password: hashedPassword });
 };
 
 export const getAllUsers = async () => {
@@ -10,6 +12,10 @@ export const getAllUsers = async () => {
 
 export const getUserById = async (id: number) => {
   return await User.findByPk(id);
+};
+
+export const getUserByEmail = async (email: string) => {
+  return await User.findOne({ where: { email } });
 };
 
 export const updateUser = async (id: number, data: Partial<UserCreationAttributes>) => {
