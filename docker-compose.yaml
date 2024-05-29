@@ -15,6 +15,20 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  mysql_test:
+    image: mysql:8.0
+    container_name: mysql_test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: testdatabase
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-test-data:/var/lib/mysql
+
   app:
     build: .
     container_name: app
@@ -32,3 +46,4 @@ services:
 
 volumes:
   mysql-data:
+  mysql-test-data:
