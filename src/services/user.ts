@@ -3,7 +3,7 @@ import { UserCreationAttributes } from '../models/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const SECRET_KEY = process.env.SECRET_KEY || 'your-secret-key';
+const SECRET_KEY = process.env.SECRET_KEY || 'secret-key';
 
 export const createUser = async (data: Omit<UserCreationAttributes, 'id'>) => {
   return await userRepository.createUser(data);
