@@ -1,5 +1,11 @@
 require('ts-node/register');
-require('dotenv').config();
+const dotenv = require('dotenv');
+const path = require('path');
+
+// 環境変数の設定
+const env = process.env.NODE_ENV || 'development';
+const envPath = path.resolve(__dirname, `../../.env.${env}`);
+dotenv.config({ path: envPath });
 
 module.exports = {
   development: {
@@ -14,6 +20,7 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'mysql',
     logging: false
   },
