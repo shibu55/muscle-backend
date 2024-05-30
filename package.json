@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
     "start": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "export NODE_ENV=test ; npm run db:setup ; jest --forceExit ; npm run db:drop",
+    "db:setup": "sequelize db:create;sequelize db:migrate;",
+    "db:drop": "sequelize db:drop"
   },
   "keywords": [],
   "author": "",
