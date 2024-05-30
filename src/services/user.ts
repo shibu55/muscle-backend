@@ -1,31 +1,31 @@
 import * as userRepository from '../repositories/user';
-import { UserCreationAttributes } from '../models/user';
+import User, { UserCreationAttributes } from '../models/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = process.env.SECRET_KEY || 'secret-key';
 
-export const createUser = async (data: Omit<UserCreationAttributes, 'id'>) => {
+export const createUser = async (data: UserCreationAttributes): Promise<User> => {
   return await userRepository.createUser(data);
 };
 
-export const getAllUsers = async () => {
+export const getAllUsers = async ():Promise<User[]> => {
   return await userRepository.getAllUsers();
 };
 
-export const getUserById = async (id: number) => {
+export const getUserById = async (id: number): Promise<User|null> => {
   return await userRepository.getUserById(id);
 };
 
-export const updateUser = async (id: number, data: Partial<UserCreationAttributes>) => {
+export const updateUser = async (id: number, data: Partial<UserCreationAttributes>): Promise<User|null> => {
   return await userRepository.updateUser(id, data);
 };
 
-export const deleteUser = async (id: number) => {
+export const deleteUser = async (id: number): Promise<void|null> => {
   return await userRepository.deleteUser(id);
 };
 
-export const authenticateUser = async (email: string, password: string) => {
+export const authenticateUser = async (email: string, password: string): Promise<{token: string}> => {
   const user = await userRepository.getUserByEmail(email);
   if (user && await bcrypt.compare(password, user.password)) {
     const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
