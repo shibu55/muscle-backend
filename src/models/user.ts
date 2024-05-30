@@ -1,20 +1,14 @@
-import { DataTypes, Model, Optional } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../config/sequelize';
-
-interface UserAttributes {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+import { UserAttributes, UserCreationAttributes } from '../types/models/user';
 
 class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: number;
   public name!: string;
   public email!: string;
   public password!: string;
+  public height?: number;
+  public weight?: number;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -40,10 +34,29 @@ User.init(
       type: new DataTypes.STRING(128),
       allowNull: false,
     },
+    height: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+    },
+    weight: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
     sequelize,
     tableName: 'users',
+    timestamps: true,
   }
 );
 
