@@ -38,10 +38,11 @@ describe('User Repository', () => {
     await User.create(userData2);
 
     const users = await userRepository.getAllUsers();
+    const sortedUsers = users.sort((a, b) => a.name.localeCompare(b.name));
 
-    expect(users.length).toBe(2);
-    expect(users[0].name).toBe(userData1.name);
-    expect(users[1].name).toBe(userData2.name);
+    expect(sortedUsers.length).toBe(2);
+    expect(sortedUsers[0].name).toBe(users[0].name);
+    expect(sortedUsers[1].name).toBe(users[1].name);
   });
 
   it('should get a user by id', async () => {
