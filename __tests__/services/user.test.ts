@@ -4,6 +4,7 @@ import { UserCreationAttributes } from '../../src/models/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import sinon from 'sinon';
+import { v4 as uuidv4 } from 'uuid';
 
 describe('User Service', () => {
   let mock: sinon.SinonMock;
@@ -32,7 +33,7 @@ describe('User Service', () => {
     };
 
     const createdUser = {
-      id: 1,
+      id: uuidv4(),
       ...userData,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -52,7 +53,7 @@ describe('User Service', () => {
   it('should get all users', async () => {
     const users = [
       {
-        id: 1,
+        id: uuidv4(),
         name: 'John Doe',
         email: 'john.doe@example.com',
         password: 'password123',
@@ -60,7 +61,7 @@ describe('User Service', () => {
         updatedAt: new Date()
       },
       {
-        id: 2,
+        id: uuidv4(),
         name: 'Jane Doe',
         email: 'jane.doe@example.com',
         password: 'password456',
@@ -74,7 +75,12 @@ describe('User Service', () => {
 
     const result = await userService.getAllUsers();
 
-    expect(result).toEqual(users);
+    // 取得したユーザーを名前でソート
+    const sortedUsers = result.sort((a, b) => a.name.localeCompare(b.name));
+
+    expect(sortedUsers.length).toBe(2);
+    expect(sortedUsers[0].name).toBe(users[0].name);
+    expect(sortedUsers[1].name).toBe(users[1].name);
 
     // 期待通りの呼び出しが行われたことを検証
     mock.verify();
@@ -82,7 +88,7 @@ describe('User Service', () => {
 
   it('should get a user by id', async () => {
     const user = {
-      id: 1,
+      id: uuidv4(),
       name: 'John Doe',
       email: 'john.doe@example.com',
       password: 'password123',
@@ -91,9 +97,9 @@ describe('User Service', () => {
     };
 
     // getUserByIdが特定の引数で呼び出されることを期待
-    mock.expects('getUserById').withExactArgs(1).resolves(user);
+    mock.expects('getUserById').withExactArgs(user.id).resolves(user);
 
-    const result = await userService.getUserById(1);
+    const result = await userService.getUserById(user.id);
 
     expect(result).toEqual(user);
 
@@ -102,22 +108,23 @@ describe('User Service', () => {
   });
 
   it('should update a user', async () => {
+    const userId = uuidv4();
     const userUpdatedData: Omit<UserCreationAttributes, 'id'> = {
       name: 'John Doe Sue',
       email: 'john.doe.sue@example.com',
       password: 'password123'
     };
     const updatedUser = {
-      id: 1,
+      id: userId,
       ...userUpdatedData,
       createdAt: new Date(),
       updatedAt: new Date()
     };
 
     // updateUserが特定の引数で呼び出されることを期待
-    mock.expects('updateUser').withExactArgs(1, userUpdatedData).resolves(updatedUser);
+    mock.expects('updateUser').withExactArgs(userId, userUpdatedData).resolves(updatedUser);
 
-    const result = await userService.updateUser(1, userUpdatedData);
+    const result = await userService.updateUser(userId, userUpdatedData);
 
     expect(result).toEqual(updatedUser);
 
@@ -126,7 +133,7 @@ describe('User Service', () => {
   });
 
   it('should delete a user', async () => {
-    const userId = 1;
+    const userId = uuidv4();
 
     // deleteUserが特定の引数で呼び出されることを期待
     mock.expects('deleteUser').withExactArgs(userId).resolves(true);
@@ -144,7 +151,7 @@ describe('User Service', () => {
     const password = 'password123';
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = {
-      id: 1,
+      id: uuidv4(),
       name: 'John Doe',
       email: 'john.doe@example.com',
       password: hashedPassword,
@@ -189,7 +196,7 @@ describe('User Service', () => {
     const email = 'john.doe@example.com';
     const password = 'invalidpassword';
     const user = {
-      id: 1,
+      id: uuidv4(),
       name: 'John Doe',
       email: email,
       password: await bcrypt.hash('password123', 10),

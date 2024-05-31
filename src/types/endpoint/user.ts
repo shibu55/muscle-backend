@@ -1,10 +1,10 @@
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
-  password: string;  // パスワードハッシュ
-  height?: number;  // cm
-  weight?: number;  // kg
+  password: string;
+  height?: number;
+  weight?: number;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -13,15 +13,15 @@ export const getAllUsers = async ():Promise<User[]> => {
   return await userRepository.getAllUsers();
 };
 
-export const getUserById = async (id: number): Promise<User|null> => {
+export const getUserById = async (id: string): Promise<User|null> => {
   return await userRepository.getUserById(id);
 };
 
-export const updateUser = async (id: number, data: Partial<UserCreationAttributes>): Promise<User|null> => {
+export const updateUser = async (id: string, data: Partial<UserCreationAttributes>): Promise<User|null> => {
   return await userRepository.updateUser(id, data);
 };
 
-export const deleteUser = async (id: number): Promise<void|null> => {
+export const deleteUser = async (id: string): Promise<void|null> => {
   return await userRepository.deleteUser(id);
 };
 

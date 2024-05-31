@@ -10,7 +10,7 @@ export const getAllUsers = async ():Promise<User[]> => {
   return await User.findAll();
 };
 
-export const getUserById = async (id: number): Promise<User|null> => {
+export const getUserById = async (id: string): Promise<User|null> => {
   return await User.findByPk(id);
 };
 
@@ -18,7 +18,7 @@ export const getUserByEmail = async (email: string): Promise<User|null> => {
   return await User.findOne({ where: { email } });
 };
 
-export const updateUser = async (id: number, data: Partial<UserCreationAttributes>): Promise<User|null> => {
+export const updateUser = async (id: string, data: Partial<UserCreationAttributes>): Promise<User|null> => {
   const user = await User.findByPk(id);
   if (user) {
     return await user.update(data);
@@ -26,7 +26,7 @@ export const updateUser = async (id: number, data: Partial<UserCreationAttribute
   return null;
 };
 
-export const deleteUser = async (id: number): Promise<void|null> => {
+export const deleteUser = async (id: string): Promise<void|null> => {
   const user = await User.findByPk(id);
   if (user) {
     return await user.destroy();

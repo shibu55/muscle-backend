@@ -25,7 +25,7 @@ export const getAllUsers = async (req: Request, res: Response<GetAllUsersRespons
 
 export const getUserById = async (req: Request<{ id: string }>, res: Response<GetUserResponse | ErrorResponse>) => {
   try {
-    const user = await userService.getUserById(Number(req.params.id));
+    const user = await userService.getUserById(req.params.id);
     if (user) {
       res.status(200).json(user);
     } else {
@@ -39,7 +39,7 @@ export const getUserById = async (req: Request<{ id: string }>, res: Response<Ge
 
 export const updateUser = async (req: Request<{ id: string }, {}, UpdateUserRequestBody>, res: Response<UpdateUserResponse | ErrorResponse>) => {
   try {
-    const user = await userService.updateUser(Number(req.params.id), req.body);
+    const user = await userService.updateUser(req.params.id, req.body);
     if (user) {
       res.status(200).json(user);
     } else {
@@ -53,7 +53,7 @@ export const updateUser = async (req: Request<{ id: string }, {}, UpdateUserRequ
 
 export const deleteUser = async (req: Request<{ id: string }>, res: Response<DeleteUserResponse | ErrorResponse>) => {
   try {
-    const user = await userService.deleteUser(Number(req.params.id));
+    const user = await userService.deleteUser(req.params.id);
     if (user) {
       res.status(200).json({ message: 'User deleted successfully' });
     } else {
