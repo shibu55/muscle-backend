@@ -4,6 +4,7 @@ import pingRoutes from './routes/ping';
 import exerciseRoutes from './routes/exercise';
 import workoutRoutes from './routes/workout';
 import workoutDetailRoutes from './routes/workoutDetail';
+import exerciseLogRoutes from './routes/exerciseLog';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -18,5 +19,6 @@ app.use('/api', pingRoutes);
 app.use('/api', exerciseRoutes);
 app.use('/api', workoutRoutes);
 app.use('/api', workoutDetailRoutes);
+app.use('/api', exerciseLogRoutes);
 
 export default app;
