@@ -1,5 +1,5 @@
 import * as workoutDetailRepository from '../repositories/workoutDetail';
-import WorkoutDetail, { WorkoutDetailCreationAttributes } from '../models/workoutDetails';
+import WorkoutDetail, { WorkoutDetailCreationAttributes } from '../models/workoutDetail';
 
 export const createWorkoutDetail = async (data: WorkoutDetailCreationAttributes): Promise<WorkoutDetail> => {
   return await workoutDetailRepository.createWorkoutDetail(data);

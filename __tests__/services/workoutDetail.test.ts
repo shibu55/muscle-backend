@@ -1,6 +1,6 @@
 import * as workoutDetailService from '../../src/services/workoutDetail';
 import * as workoutDetailRepository from '../../src/repositories/workoutDetail';
-import { WorkoutDetailCreationAttributes } from '../../src/models/workoutDetails';
+import { WorkoutDetailCreationAttributes } from '../../src/models/workoutDetail';
 import sinon from 'sinon';
 import { v4 as uuidv4 } from 'uuid';
 

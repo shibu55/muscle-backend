@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../../src/app';
-import WorkoutDetail from '../../src/models/workoutDetails';
+import WorkoutDetail from '../../src/models/workoutDetail';
 import Workout from '../../src/models/workout';
 import Exercise from '../../src/models/exercise';
 import User from '../../src/models/user';
