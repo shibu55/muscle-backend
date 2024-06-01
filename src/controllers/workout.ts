@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import * as workoutService from '../services/workout';
 import { 
   CreateWorkoutRequestBody, 
@@ -9,9 +9,9 @@ import {
   UpdateWorkoutResponse, 
   DeleteWorkoutResponse 
 } from '../types/endpoint/workout';
-import { ErrorResponse } from '../types/endpoint/common';
+import { ErrorResponse, CustomRequest } from '../types/endpoint/common';
 
-export const createWorkout = async (req: Request<{}, {}, CreateWorkoutRequestBody>, res: Response<CreateWorkoutResponse | ErrorResponse>) => {
+export const createWorkout = async (req: CustomRequest<{}, {}, CreateWorkoutRequestBody>, res: Response<CreateWorkoutResponse | ErrorResponse>) => {
   try {
     const workout = await workoutService.createWorkout(req.body);
     res.status(201).json(workout);
@@ -21,7 +21,7 @@ export const createWorkout = async (req: Request<{}, {}, CreateWorkoutRequestBod
   }
 };
 
-export const getAllWorkouts = async (req: Request, res: Response<GetAllWorkoutsResponse | ErrorResponse>) => {
+export const getAllWorkouts = async (req: CustomRequest, res: Response<GetAllWorkoutsResponse | ErrorResponse>) => {
   try {
     const workouts = await workoutService.getAllWorkouts();
     res.status(200).json({ workouts });
@@ -31,7 +31,7 @@ export const getAllWorkouts = async (req: Request, res: Response<GetAllWorkoutsR
   }
 };
 
-export const getWorkoutById = async (req: Request<{ id: string }>, res: Response<GetWorkoutResponse | ErrorResponse>) => {
+export const getWorkoutById = async (req: CustomRequest<{ id: string }>, res: Response<GetWorkoutResponse | ErrorResponse>) => {
   try {
     const workout = await workoutService.getWorkoutById(req.params.id);
     if (workout) {
@@ -45,7 +45,7 @@ export const getWorkoutById = async (req: Request<{ id: string }>, res: Response
   }
 };
 
-export const updateWorkout = async (req: Request<{ id: string }, {}, UpdateWorkoutRequestBody>, res: Response<UpdateWorkoutResponse | ErrorResponse>) => {
+export const updateWorkout = async (req: CustomRequest<{ id: string }, {}, UpdateWorkoutRequestBody>, res: Response<UpdateWorkoutResponse | ErrorResponse>) => {
   try {
     const workout = await workoutService.updateWorkout(req.params.id, req.body);
     if (workout) {
@@ -59,7 +59,7 @@ export const updateWorkout = async (req: Request<{ id: string }, {}, UpdateWorko
   }
 };
 
-export const deleteWorkout = async (req: Request<{ id: string }>, res: Response<DeleteWorkoutResponse | ErrorResponse>) => {
+export const deleteWorkout = async (req: CustomRequest<{ id: string }>, res: Response<DeleteWorkoutResponse | ErrorResponse>) => {
   try {
     const workout = await workoutService.deleteWorkout(req.params.id);
     if (workout) {
