@@ -5,6 +5,7 @@ import exerciseRoutes from './routes/exercise';
 import workoutRoutes from './routes/workout';
 import workoutDetailRoutes from './routes/workoutDetail';
 import exerciseLogRoutes from './routes/exerciseLog';
+import bodyMeasurementRoutes from './routes/bodyMeasurement';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -20,5 +21,6 @@ app.use('/api', exerciseRoutes);
 app.use('/api', workoutRoutes);
 app.use('/api', workoutDetailRoutes);
 app.use('/api', exerciseLogRoutes);
+app.use('/api', bodyMeasurementRoutes);
 
 export default app;
