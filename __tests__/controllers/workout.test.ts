@@ -9,8 +9,8 @@ const mockUser = {
   name: 'Test User',
   email: 'test@example.com',
   password: 'password',
-  height: 170,
-  weight: 70
+  height: '170',
+  weight: '70'
 };
 
 let mockToken: string;
@@ -29,6 +29,11 @@ beforeAll(async () => {
 
 describe('Workout API', () => {
   beforeEach(async () => {
+    await Workout.destroy({ where: {} });
+  });
+
+  afterAll(async () => {
+    await User.destroy({ where: {} });
     await Workout.destroy({ where: {} });
   });
 

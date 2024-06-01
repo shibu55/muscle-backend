@@ -7,8 +7,8 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public name!: string;
   public email!: string;
   public password!: string;
-  public height?: number;
-  public weight?: number;
+  public height?: string;
+  public weight?: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

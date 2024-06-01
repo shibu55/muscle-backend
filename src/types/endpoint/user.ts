@@ -3,8 +3,8 @@ export interface User {
   name: string;
   email: string;
   password: string;
-  height?: number;
-  weight?: number;
+  height?: string;
+  weight?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -13,16 +13,16 @@ export interface CreateUserRequestBody {
   name: string;
   email: string;
   password: string;
-  height: number;
-  weight: number;
+  height?: string;
+  weight?: string;
 }
 
 export interface UpdateUserRequestBody {
   name?: string;
   email?: string;
   password?: string;
-  height?: number;
-  weight?: number;
+  height?: string;
+  weight?: string;
 }
 
 export interface LoginUserRequestBody {

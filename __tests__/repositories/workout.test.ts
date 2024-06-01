@@ -8,13 +8,18 @@ describe('Workout Repository', () => {
 
   beforeAll(async () => {
     // テスト用のユーザーを作成
-    const user1 = await User.create({ name: 'Test User 1', email: 'user1@example.com', password: 'password1', height: 170, weight: 70 });
-    const user2 = await User.create({ name: 'Test User 2', email: 'user2@example.com', password: 'password2', height: 175, weight: 75 });
+    const user1 = await User.create({ name: 'Test User 1', email: 'user1@example.com', password: 'password1', height: '170', weight: '70' });
+    const user2 = await User.create({ name: 'Test User 2', email: 'user2@example.com', password: 'password2', height: '175', weight: '75' });
     userId1 = user1.id;
     userId2 = user2.id;
   });
 
   beforeEach(async () => {
+    await Workout.destroy({ where: {} });
+  });
+
+  afterAll(async () => {
+    await User.destroy({ where: {} });
     await Workout.destroy({ where: {} });
   });
 

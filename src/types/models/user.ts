@@ -3,8 +3,8 @@ export interface UserAttributes {
   name: string;
   email: string;
   password: string;
-  height?: number;
-  weight?: number;
+  height?: string;
+  weight?: string;
   createdAt: Date;
   updatedAt: Date;
 }
