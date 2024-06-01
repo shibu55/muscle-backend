@@ -18,6 +18,10 @@ describe('User API', () => {
     await User.destroy({ where: {} });
   });
 
+  afterAll(async () => {
+    await User.destroy({ where: {} });
+  });
+
   it('should create a new user', async () => {
     const response = await request(app)
       .post('/api/users')

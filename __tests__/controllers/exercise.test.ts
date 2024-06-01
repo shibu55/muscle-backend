@@ -16,6 +16,10 @@ describe('Exercise API', () => {
     await Exercise.destroy({ where: {} });
   });
 
+  afterAll(async () => {
+    await Exercise.destroy({ where: {} });
+  });
+
   it('should create a new exercise', async () => {
     const response = await request(app)
       .post('/api/exercises')

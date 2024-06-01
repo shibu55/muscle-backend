@@ -6,6 +6,10 @@ describe('Exercise Repository', () => {
     await Exercise.destroy({ where: {} });
   });
 
+  afterAll(async () => {
+    await Exercise.destroy({ where: {} });
+  });
+
   it('should create an exercise', async () => {
     const exerciseData = {
       name: 'Squat',

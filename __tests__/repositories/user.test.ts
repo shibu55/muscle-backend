@@ -7,6 +7,10 @@ describe('User Repository', () => {
     await User.destroy({ where: {} });
   });
 
+  afterAll(async () => {
+    await User.destroy({ where: {} });
+  });
+
   it('should create a user', async () => {
     const userData = {
       name: 'John Doe',
